@@ -1,13 +1,30 @@
 # Final Project for Python Crash Course
 
+# Obtain time of log-on or log-off
+def get_event_date(event):
+    return event.date
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def current_users(events):
+    events.sort(key=get_event_date)
+    machines = {}
+    for event in events:
+        if event.machine not in machines:
+            machines[event.machine] = set()
+        if event.type == "login":
+            machines[event.machine].add(event.user)
+        elif event.type == "logout":
+            machines[event.machine].remove(event.user)
+    return machines
+
+def generate_report(machines):
+    for machine, users in machines.items():
+        if len(users) > 0:
+            user_list = ", ".join(users)
+            print("{}: {}".format(machine, user_list))
 
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    get_event_date('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
