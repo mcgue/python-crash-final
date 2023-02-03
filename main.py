@@ -22,7 +22,12 @@ def generate_report(machines):
             user_list = ", ".join(users)
             print("{}: {}".format(machine, user_list))
 
-
+class Event:
+    def __inti(self, event_date, event_type, machine_name, user):
+        self.event_date = event_date
+        self.event_type = event_type
+        self.machine_name = machine_name
+        self.user = user
 
 if __name__ == '__main__':
     get_event_date('PyCharm')
